@@ -36,7 +36,7 @@ app.post('/calculate_stats', multerUpl.single('file'), async (req, res) => {
         const cacheKey: string = `${species}_${req.file.originalname}`;
         const cacheFilePath: string = path.join(cacheDir, `${cacheKey}.json`);
 
-        let response: StatsResponse;
+        let response: StatsResponse = null;
 
         if (!fs.existsSync(cacheFilePath)) {
             const dataset = JSON.parse(req.file.buffer.toString());
@@ -62,31 +62,66 @@ app.post('/calculate_stats', multerUpl.single('file'), async (req, res) => {
 });
 
 function createStatsResponse(filteredData: any[]): StatsResponse {
-    const calculateStats = (data: any[]) => ({
-        avg: (prop: string) => +(data.reduce((sum, item) => sum + item[prop], 0) / data.length),
-        min: (prop: string) => +Math.min(...data.map(item => item[prop])),
-        max: (prop: string) => +Math.max(...data.map(item => item[prop])),
-    });
+    const sepalLengthValues = filteredData.map((item: any) => item.sepalLength);
+    const sepalWidthValues = filteredData.map((item: any) => item.sepalWidth);
+    const petalLengthValues = filteredData.map((item: any) => item.petalLength);
+    const petalWidthValues = filteredData.map((item: any) => item.petalWidth);
+
 
     return {
-        sepalLengthAvg: calculateStats(filteredData).avg('sepalLength'),
-        sepalWidthAvg: calculateStats(filteredData).avg('sepalWidth'),
-        petalLengthAvg: calculateStats(filteredData).avg('petalLength'),
-        petalWidthAvg: calculateStats(filteredData).avg('petalWidth'),
-        sepalLengthMin: calculateStats(filteredData).min('sepalLength'),
-        sepalWidthMin: calculateStats(filteredData).min('sepalWidth'),
-        petalLengthMin: calculateStats(filteredData).min('petalLength'),
-        petalWidthMin: calculateStats(filteredData).min('petalWidth'),
-        sepalLengthMax: calculateStats(filteredData).max('sepalLength'),
-        sepalWidthMax: calculateStats(filteredData).max('sepalWidth'),
-        petalLengthMax: calculateStats(filteredData).max('petalLength'),
-        petalWidthMax: calculateStats(filteredData).max('petalWidth'),
+        sepalLengthAvg: findAvg(sepalLengthValues),
+        sepalWidthAvg: findAvg(sepalWidthValues),
+        petalLengthAvg: findAvg(petalLengthValues),
+        petalWidthAvg: findAvg(petalWidthValues),
+        sepalLengthMin: findMin(sepalLengthValues),
+        sepalWidthMin: findMin(sepalWidthValues),
+        petalLengthMin: findMin(petalLengthValues),
+        petalWidthMin: findMin(petalWidthValues),
+        sepalLengthMax: findMax(sepalLengthValues),
+        sepalWidthMax: findMax(sepalWidthValues),
+        petalLengthMax: findMax(petalLengthValues),
+        petalWidthMax: findMax(petalWidthValues),
         isSuccess: true
     };
 }
 
 function saveDataToCache(cacheFilePath: string, data: ApiResponse): void {
     fs.writeFileSync(cacheFilePath, JSON.stringify(data));
+}
+
+function findAvg(arr: number[]): number {
+    const sum = arr.reduce((acc , val) => acc + val, 0);
+    return sum / arr.length;
+}
+
+function findMin(arr: number[]): number {
+    if (arr.length == 0) {
+        return null;
+    }
+
+    let min = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        if(arr[i] < min){
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+function findMax(arr: number[]): number {
+    if (arr.length == 0) {
+        return null;
+    }
+
+    let max = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        if(arr[i] > max){
+            max = arr[i]
+        }
+    }
+    return max;
 }
 
 app.listen(
