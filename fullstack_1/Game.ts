@@ -32,12 +32,12 @@ class Game {
         let goldPos: Position;
         let wumpusPos: Position;
 
-        // parliecinieties, ka zelts neuzspawno uz speletaja, Wumpus vai bedrem
+        // Ensures that gold does not spawn on the player, Wumpus, or pits
         do {
             goldPos = this.getRandomPosition();
         } while (this.isPitAtPosition(goldPos) || this.isWumpusAtPosition(goldPos) || this.arePositionsEqual(playerPos, goldPos));
 
-        // parliecinieties, ka Wumpus neuzspawnojas uz speletaja, zelta vai bedrem
+        // Ensures that the Wumpus does not spawn on the player, gold, or pits
         do {
             wumpusPos = this.getRandomPosition();
         } while (
@@ -50,7 +50,7 @@ class Game {
         for (let i = 0; i < 3; i++) {
             let pitPos: Position;
 
-            // parliecinieties, ka bedre neuzspawnojas uz speletaja, zelta, Wumpus vai citam bedrem
+            // Ensures that the pit does not spawn on the player, gold, Wumpus, or other pits
             do {
                 pitPos = this.getRandomPosition();
             } while (
@@ -147,19 +147,15 @@ class Game {
                 let cellContent = '';
 
                 if (!this._discoveredMap[x][y]) {
-                    cellContent = '?'; // raada ja suna nav atklaata
+                    cellContent = '?'; // Shows if not discovered
                 } else {
-                    // ja suna atklata tad rada vienu no sekojosiem:
+                    // Shows one if is discovered:
                     cellContent =
-                        this._player.getPosition().x === x && this._player.getPosition().y === y
-                            ? 'P'
-                            : this._gold.getPosition().x === x && this._gold.getPosition().y === y
-                                ? 'G'
-                                : this.isPitAtPosition({x, y})
-                                    ? 'O'
-                                    : this._wumpus.getPosition().x === x && this._wumpus.getPosition().y === y
-                                        ? 'W'
-                                        : '.';
+                        this.playerAtPos(x, y) ? 'P' :
+                            this.goldAtPos(x, y) ? 'G' :
+                                this.pitAtPos({ x, y }) ? 'O' :
+                                    this.wumpusAtPos(x, y) ? 'W' :
+                                        '.';
                 }
 
                 row += cellContent + ' ';
@@ -167,6 +163,21 @@ class Game {
 
             console.log(row);
         }
+    }
+    playerAtPos(x: number, y: number): boolean {
+        return this._player.getPosition().x === x && this._player.getPosition().y === y;
+    }
+
+    goldAtPos(x: number, y: number): boolean {
+        return this._gold.getPosition().x === x && this._gold.getPosition().y === y;
+    }
+
+    pitAtPos(position: { x: number, y: number }): boolean {
+        return this.isPitAtPosition(position);
+    }
+
+    wumpusAtPos(x: number, y: number): boolean {
+        return this._wumpus.getPosition().x === x && this._wumpus.getPosition().y === y;
     }
 
     // private moveWumpus(): void {
@@ -213,10 +224,10 @@ class Game {
     private updateDiscoveredMap(): void {
         const playerPos = this._player.getPosition();
 
-        // atklaaj speletaja pasreizejo poziciju
+        // Reveals the player's current position
         this._discoveredMap[playerPos.x][playerPos.y] = true;
 
-        // atklaj laukumus apkart uz katru pusi pa 1, ja tie nav jau atklati
+        // Reveals the squares around, in each direction by 1, if they haven't been revealed yet
         const adjacentPositions: Position[] = [
             {x: playerPos.x - 1, y: playerPos.y},
             {x: playerPos.x + 1, y: playerPos.y},
@@ -263,16 +274,16 @@ class Game {
     private checkGameState(): void {
         const playerPos = this._player.getPosition();
 
-        // paarbauda, vai speletaajs ir uz zelta
+        // Checks if the player is on gold
         const isOnGold = this._gold.getPosition().x === playerPos.x && this._gold.getPosition().y === playerPos.y;
 
-        // paarbauda, vai speletaajs ir uz kadas no bedrem
+        // Checks if the player is on any of the pits
         const isOnPit = this._pits.some((pit) => pit.getPosition().x === playerPos.x && pit.getPosition().y === playerPos.y);
 
-        // paarbauda, vai speletaajs ir uz wumpus
+        // Checks if the player is on Wumpus
         const isOnWumpus = this._wumpus.getPosition().x === playerPos.x && this._wumpus.getPosition().y === playerPos.y;
 
-        // parbauda uzvaras un zaudejuma nosacijumus
+        // Checks the conditions for winning and losing
         if (isOnGold) {
             console.log('Congrats! You found the gold. You win!');
             this.newGame();
@@ -292,18 +303,18 @@ class Game {
     private isGameOver(): boolean {
         const playerPos = this._player.getPosition();
 
-        // paarbauda, vai speletaajs ir uz kaadas no bedreem
+        // Checks if the player is on any of the pits
         const isOnPit = this._pits.some((pit) => pit.getPosition().x === playerPos.x && pit.getPosition().y === playerPos.y);
 
-        // paarbauda, vai speletaajs ir uz wumpus
+        // Checks if the player is on the Wumpus
         const isOnWumpus = this._wumpus.getPosition().x === playerPos.x && this._wumpus.getPosition().y === playerPos.y;
 
-        // atgriez ja speletajs ir uzkapis uz pit vai wumpus
         return isOnPit || isOnWumpus;
     }
 }
-// izveidot game ar izveloto kartes lielumu
+
+// Create a game with the selected map size
 const game = new Game({x: 4, y: 4});
 
-// sakt speli
+// Start game
 game.promptUser();
