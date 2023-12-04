@@ -34,7 +34,7 @@ app.post('/calculate_stats', multerUpl.single('file'), async (req, res) => {
 
 
         const cacheKey: string = `${species}_${req.file.originalname}`;
-        const cacheFilePath: string = path.join(cacheDir, `${cacheKey}.json`);
+        const cacheFilePath: string = path.join(cacheDir, `${cacheKey}`);
 
         let response: StatsResponse = null;
 
