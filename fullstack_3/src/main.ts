@@ -58,6 +58,23 @@ const main = async () => {
             res.json(response);
         });
 
+        app.post('/deleteHabit', async (req, res) =>{
+            let response = {
+                success: false
+            };
+
+            let request = req.body;
+            let success = await ControllerDatabase.instance.deleteHabit(
+                request.session_token.trim(),
+                request.label.trim()
+            )
+            if (success) {
+                response.success = success;
+            }
+
+            res.json(response);
+        });
+
         app.listen(
             PORT,
             () => {

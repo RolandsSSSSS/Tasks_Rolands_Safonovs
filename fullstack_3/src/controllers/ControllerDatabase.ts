@@ -97,7 +97,7 @@ export class ControllerDatabase {
             );
 
             if (exHabit.length > 0) {
-                return exHabit[0] as DbHabit;
+                return exHabit[0];
             }else{
                 await this.dataSource.query(
                     "INSERT INTO habit (user_id, label, created) VALUES (?, ?, CURRENT_TIMESTAMP)",
@@ -121,5 +121,40 @@ export class ControllerDatabase {
             return habit;
         }
 
+    }
+
+    public async deleteHabit(
+        session_token: string,
+        label: string
+    ): Promise<boolean> {
+        let success = false;
+        let rows = await this.dataSource.query(
+            "SELECT * FROM session WHERE token = :token AND is_valid = 1 LIMIT 1",
+            [
+                session_token
+            ]
+        );
+
+        if (rows.length > 0) {
+            let user_id = rows[0].user_id;
+
+            let exHabit = await this.dataSource.query(
+                "SELECT * FROM habit WHERE user_id = :user_id AND label = :label AND is_deleted = 0 LIMIT 1",
+                [
+                    user_id, label
+                ]
+            );
+
+            if (exHabit.length > 0){
+                await this.dataSource.query(
+                    "UPDATE habit SET is_deleted = 1 WHERE habit_id = ?",
+                    [
+                        exHabit[0].habit_id
+                    ]
+                );
+                success = true;
+            }
+        }
+        return success;
     }
 }
