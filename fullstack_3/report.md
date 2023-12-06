@@ -40,4 +40,12 @@
 
    ![image-20231206134107233](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206134107233.png)
 
+   pievienoju deleteHabit(controllerDatabase), tas strādā līdzigi kā addHabit, tikai tas nomaina is_deleted uz 1(true), ja session_token, label sakrīt jau ar pievienoto un atgriez vienkārši success(bool)
+
+   ![image-20231206153415028](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206153415028.png)
+
+   un tad pievienoju jaunu app.post(/deleteHabit), kurs ir kā /addHabit bet vienkārši atgriez success: true vai success: false 
+
+   ![image-20231206153834846](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206153834846.png)
+
 4. 
