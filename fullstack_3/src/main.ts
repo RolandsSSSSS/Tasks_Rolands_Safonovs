@@ -28,8 +28,8 @@ const main = async () => {
 
             let request = req.body;
             let session = await ControllerDatabase.instance.login(
-                request.username.trim(),
-                request.password.trim(),
+                request.email.trim(),
+                request.pass.trim(),
             )
             if(session) {
                 response.session_token = session.token;
@@ -39,7 +39,24 @@ const main = async () => {
             res.json(response);
         });
 
-        // TODO
+        app.post('/addHabit', async (req, res) => {
+            let response = {
+                habit: null,
+                success: false,
+            };
+
+            let request = req.body;
+            let habit = await ControllerDatabase.instance.addHabit(
+                request.session_token.trim(),
+                request.label.trim()
+            )
+            if (habit) {
+                response.habit = habit;
+                response.success = true;
+            }
+
+            res.json(response);
+        });
 
         app.listen(
             PORT,

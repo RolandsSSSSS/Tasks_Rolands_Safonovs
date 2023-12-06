@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import {OrmUser} from "../models/orm/OrmUser";
 import {OrmSession} from "../models/orm/OrmSession";
 import {query} from "express";
+import {DbHabit} from "../models/db/DbHabit";
 
 export class ControllerDatabase {
     //singleton
@@ -15,7 +16,7 @@ export class ControllerDatabase {
         //init litesql datasource
         this.dataSource = new DataSource({
             type: "sqlite",
-            database: "./database.sqlite",
+            database: "./src/database/databasemd.sqlite",
             logging: false,
             synchronize: false,
             entities: []
@@ -37,17 +38,17 @@ export class ControllerDatabase {
     }
 
     public async login(
-        username: string,
-        password: string
+        email: string,
+        pass: string
     ): Promise<DbSession> {
         let session: DbSession = null;
 
-        let passwordHashed = sha1(password);
+        let passwordHashed = sha1(pass);
 
         let rows = await this.dataSource.query(
-            "SELECT * FROM users WHERE username = :username AND password = :password AND is_deleted = 0 LIMIT 1",
+            "SELECT * FROM user WHERE email = :email AND pass = :pass AND is_deleted = 0 LIMIT 1",
             [
-                    username, passwordHashed
+                    email, passwordHashed
             ]
         )
         if(rows.length > 0) {
@@ -56,21 +57,69 @@ export class ControllerDatabase {
 
             let token = uuidv4();
             await this.dataSource.query(
-                "INSERT INTO sessions (user_id, device_uuid, token) VALUES (?, ?, ?)",
-                [user.user_id, "", token]
+                "INSERT INTO session (user_id, token, created) VALUES (?, ?, CURRENT_TIMESTAMP)",
+                [user.user_id, token]
             );
 
             let rowlast = await this.dataSource.query("SELECT last_insert_rowid() as session_id");
             session = {
                 session_id: rowlast.session_id,
                 user_id: user.user_id,
-                device_uuid: "",
                 token: token,
                 is_valid: true,
+                created: rowlast.created,
                 user: user
             }
         }
 
         return session;
+    }
+
+    public async addHabit(
+        session_token: string,
+        label: string
+    ): Promise<DbHabit> {
+        let habit: DbHabit = null
+        let rows = await this.dataSource.query(
+            "SELECT * FROM session WHERE token = :token AND is_valid = 1 LIMIT 1",
+            [
+                session_token
+            ]
+        )
+        if (rows.length > 0) {
+            let user_id = rows[0].user_id;
+
+            let exHabit = await this.dataSource.query(
+                "SELECT * FROM habit WHERE user_id = :user_id AND label = :label AND is_deleted = 0 LIMIT 1",
+                [
+                    user_id, label
+                ]
+            );
+
+            if (exHabit.length > 0) {
+                return exHabit[0] as DbHabit;
+            }else{
+                await this.dataSource.query(
+                    "INSERT INTO habit (user_id, label, created) VALUES (?, ?, CURRENT_TIMESTAMP)",
+                    [
+                        user_id, label
+                    ]
+                );
+
+                let rowlast = await this.dataSource.query("SELECT last_insert_rowid() as habit_id");
+                habit = {
+                    habit_id: rowlast[0].habit_id,
+                    user_id: rows[0].user_id,
+                    label: label,
+                    is_deleted: false,
+                    created: rowlast[0].created
+                }
+
+                return habit;
+            }
+        }else{
+            return habit;
+        }
+
     }
 }

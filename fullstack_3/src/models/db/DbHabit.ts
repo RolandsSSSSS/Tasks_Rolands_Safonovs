@@ -1,11 +1,11 @@
 import {DbUser} from "./DbUser";
 
-export interface DbSession
+export interface DbHabit
 {
-    session_id: number;
+    habit_id: number;
     user_id: number;
-    token: string;
-    is_valid: boolean;
+    label: string;
+    is_deleted: boolean;
     created: Date;
 
     user?: DbUser;
