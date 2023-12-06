@@ -157,4 +157,23 @@ export class ControllerDatabase {
         }
         return success;
     }
+
+    public async listHabits(
+        session_token: string
+    ): Promise<DbHabit[]>{
+        let habits: DbHabit[] = null;
+
+        let rows = await this.dataSource.query(
+            "SELECT h.* FROM session s JOIN user u ON s.user_id = u.user_id JOIN habit h ON u.user_id = h.user_id " +
+            "WHERE s.token = :token AND s.is_valid = 1 AND h.is_deleted = 0",
+            [
+                session_token
+            ]
+        );
+        if (rows.length > 0){
+            habits = rows;
+        }
+
+        return habits;
+    }
 }

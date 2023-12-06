@@ -44,8 +44,26 @@
 
    ![image-20231206153415028](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206153415028.png)
 
-   un tad pievienoju jaunu app.post(/deleteHabit), kurs ir kā /addHabit bet vienkārši atgriez success: true vai success: false 
+   un tad pievienoju jaunu app.post(/deleteHabit), kurš ir kā /addHabit bet vienkārši atgriež success: true vai success: false 
 
    ![image-20231206153834846](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206153834846.png)
 
-4. 
+   pievienoju listHabits(ControllerDatabase), kurš paņem session_token, tad palaiž garo sql komandu kura paņem visus habit un salīdzina visu table user_id(session ar user, tad user ar habit) un tad pārbauda token, is_valid un is_deleted. Un pēc ta visa ir pārbaude vai rows ir vismaz 1 ieraksts, ja ir tad habits ir rows un ja nav tad vienkārši atgriež habits, kas ir null
+
+   ![image-20231206161318081](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206161318081.png)
+
+   un tad pievienoju app.post(/listHabits), kurs ir vienkarši copy paste no addHabit ar ļoti minimālām izmaiņām(habit nomainiju uz habits un izdzēsu request.label.trim())
+
+   ![image-20231206162446123](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206162446123.png)
+
+4. Visas funkcijas, izņemot login stradā ar session_token
+
+5. Šeit būs visi screenshot:
+
+   login:![image-20231206162825648](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206162825648.png)
+
+addHabit:![image-20231206163209088](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206163209088.png)
+
+deleteHabit:![image-20231206163437294](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206163437294.png)
+
+listHabits:![image-20231206163557375](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206163557375.png)

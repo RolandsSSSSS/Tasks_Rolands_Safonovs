@@ -75,6 +75,24 @@ const main = async () => {
             res.json(response);
         });
 
+        app.post('/listHabits', async (req, res) =>{
+            let response = {
+                habits: null,
+                success: false,
+            };
+
+            let request = req.body;
+            let habits = await ControllerDatabase.instance.listHabits(
+                request.session_token.trim(),
+            )
+            if (habits) {
+                response.habits = habits;
+                response.success = true;
+            }
+
+            res.json(response);
+        });
+
         app.listen(
             PORT,
             () => {
