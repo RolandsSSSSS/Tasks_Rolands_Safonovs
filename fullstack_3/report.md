@@ -2,7 +2,7 @@
 
 1. Izveidoju database pēc dotās diagrammas 
 
-   ![image-20231206103346116](C:\Users\xnzza\AppData\Roaming\Typora\typora-user-images\image-20231206103346116.png)
+   ![image-20231206103346116](C:\Users\xnzza\Desktop\prak_uzd_2\Tasks_Rolands_Safonovs\fullstack_3\report_img\image-20231206103346116.png)
 
 2. nomainiju 2 nosaukumus failā DbUser lai būtu kā db
 
