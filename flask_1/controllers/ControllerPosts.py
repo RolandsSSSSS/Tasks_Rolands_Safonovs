@@ -15,20 +15,24 @@ class ControllerPosts:
             post = ModelPost()
             post.title = request.form.get('post_title').strip()
             post.body = request.form.get('post_body').strip()
+            post.url_slug = request.form.get('url_slug')
+
+            if post.url_slug is None:
+                post.url_slug = post.title.replace(" ", "_")
 
             post_id = ControllerDatabase.insert_post(post)
 
             # postback / redirect after GET => POST => redirect => GET
-            return redirect(url_for('posts.post_view', post_id=post_id))
+            return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 
         return flask.render_template(
             'posts/new.html'
         )
 
     @staticmethod
-    @blueprint.route("/view/<post_id>", methods=["GET"])
-    def post_view(post_id):
-        post = ControllerDatabase.get_post(post_id)
+    @blueprint.route("/view/<url_slug>", methods=["GET"])
+    def post_view(url_slug):
+        post = ControllerDatabase.get_post(url_slug)
         return flask.render_template(
             'posts/view.html',
             post=post

@@ -15,8 +15,8 @@ class ControllerDatabase:
             with ControllerDatabase.__connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "INSERT INTO posts (body, title) "
-                    "VALUES (:body, :title);",
+                    "INSERT INTO posts (body, title, url_slug) "
+                    "VALUES (:body, :title, :url_slug);",
                     post.__dict__
                 )
                 post_id = cursor.execute("SELECT last_insert_rowid()").fetchone()[0]
@@ -40,14 +40,14 @@ class ControllerDatabase:
             print(exc)
 
     @staticmethod
-    def get_post(post_id: int) -> ModelPost:
+    def get_post(url_slug: str) -> ModelPost:
         post = None
         try:
             with ControllerDatabase.__connection() as conn:
                 cursor = conn.cursor()
                 query = cursor.execute(
-                    "SELECT * FROM posts WHERE post_id = :post_id LIMIT 1;",
-                    {'post_id': post_id}
+                    "SELECT * FROM posts WHERE url_slug = :url_slug LIMIT 1;",
+                    {'url_slug': url_slug}
                 )
                 if query.rowcount:
                     col = query.fetchone()
