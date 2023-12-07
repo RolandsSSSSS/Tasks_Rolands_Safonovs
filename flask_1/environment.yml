@@ -3,7 +3,7 @@
 # conda info --envs
 # conda remove --name course_flask --all
 
-name: course_flask
+name: course_flask2
 channels:
   - anaconda
   - conda-forge
