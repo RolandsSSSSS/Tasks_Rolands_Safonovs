@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+</head>
+<body>
+    <!-- Jinja Flask templating language -->
+    {% if message|length > 0 %}
+        <div style="color: red;">{{ message }}</div>
+    {% endif %}
+</body>
+</html>
