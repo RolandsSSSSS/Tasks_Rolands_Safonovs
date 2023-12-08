@@ -17,6 +17,11 @@ label, input, textarea {
 textarea {
     height: 200px;
 }
+div {
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+}
 
 /* Table */
 table {
