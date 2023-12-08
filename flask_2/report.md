@@ -35,3 +35,11 @@
    un izmainiju edit.html pieliku if{}else{}, ja post.post_id nav tukš tad izmanto update vajadzīgo(nomaina header uz Update Post, Save uz Update un visiem laukiem jau iedod izvelētā post values, button_type = edit), bet ja post.post_id ir tukšs tad vienkārši izmanto visu zem else, kur ir iepriekšējais html kods
 
    ![image-20231208055417948](https://s2.loli.net/2023/12/08/38sfgVeSLEIotGp.png)
+   
+   salaboju ka edit lapa tagad padod post_id kad izmanto Update
+   
+   ![image-20231208062748561](https://s2.loli.net/2023/12/08/JieDXkNVRtBFdqb.png)
+   
+   un salaboju mazu kludu, ka "/?delete=" uzrādija nepareizo post_id, man bija post.post_id
+   
+   ![image-20231208063504863](https://s2.loli.net/2023/12/08/bd1rRC6tzyYDOJE.png) 

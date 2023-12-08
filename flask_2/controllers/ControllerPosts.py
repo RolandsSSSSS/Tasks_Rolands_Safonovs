@@ -23,7 +23,7 @@ class ControllerPosts:
             if button_type == "delete":
                 post_id = int(request.form.get('post_id'))
                 ControllerDatabase.delete_post(post_id)
-                return redirect(f'/?deleted={post.post_id}')
+                return redirect(f'/?deleted={post_id}')
 
             post.title = request.form.get('post_title').strip()
             post.body = request.form.get('post_body').strip()

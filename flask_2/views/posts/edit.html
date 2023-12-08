@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>{% if post.post_id > 0 %}Update post{% else %}New post{% endif %}</h1>
-        <form action="{{ url_for('posts.post_edit') }}" method="POST">
+        <form action="{% if post.post_id > 0 %}{{ url_for('posts.post_edit', post_id=post.post_id) }}{% else %}{{ url_for('posts.post_edit') }}{% endif %}" method="POST">
             <label>Title</label>
             {% if post.post_id > 0 %}
                 <input type="text" name="post_title" value="{{ post.title }}" />
