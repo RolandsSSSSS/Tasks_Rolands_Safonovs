@@ -14,7 +14,7 @@ class ControllerDatabase:
             with ControllerDatabase.__connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "INSERT INTO posts (body, title, url_slug) "
+                    "INSERT INTO posts (title, body, url_slug) "
                     "VALUES (:title, :body, :url_slug);",
                     post.__dict__
                 )
@@ -30,8 +30,8 @@ class ControllerDatabase:
             with ControllerDatabase.__connection() as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "UPDATE posts SET (title, body, url_slug) = "
-                    "(:title, :body, :url_slug) WHERE post_id = :post_id",
+                    "UPDATE posts SET (title, body, url_slug, modified) = "
+                    "(:title, :body, :url_slug, CURRENT_TIMESTAMP) WHERE post_id = :post_id",
                     post.__dict__
                 )
                 cursor.close()
@@ -88,3 +88,31 @@ class ControllerDatabase:
                 )
         except Exception as exc:
             print(exc)
+
+    @staticmethod
+    def get_all_posts():
+        posts = []
+        try:
+            with ControllerDatabase.__connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    "SELECT post_id, title, body, created, modified, url_slug, thumbnail_uuid, status FROM posts;"
+                )
+                for row in cursor.fetchall():
+                    post = ModelPost()
+
+                    (
+                        post.post_id,
+                        post.title,
+                        post.body,
+                        post.created,
+                        post.modified,
+                        post.url_slug,
+                        post.thumbnail_uuid,
+                        post.status
+                    ) = row
+                    posts.append(post)
+                cursor.close()
+        except Exception as exc:
+            print(exc)
+        return posts

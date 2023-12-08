@@ -17,3 +17,37 @@ label, input, textarea {
 textarea {
     height: 200px;
 }
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #ddd;
+    color: black;
+}
+
+.tableh th {
+    background-color: #BBBBBB;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+td a {
+    text-decoration: none;
+    color: #001BFF;
+    font-weight: bold;
+}
+
+td a:hover {
+    color: #333;
+}

@@ -3,11 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 </head>
 <body>
     <!-- Jinja Flask templating language -->
     {% if message|length > 0 %}
         <div style="color: red;">{{ message }}</div>
     {% endif %}
+
+    <table>
+        <tr class="tableh">
+            <th>Title</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </tr>
+        {% for post in posts %}
+            <tr>
+                <th>{{ post.title }}</th>
+                <th> {{ post.modified }}</th>
+                <td><a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}">Edit</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
