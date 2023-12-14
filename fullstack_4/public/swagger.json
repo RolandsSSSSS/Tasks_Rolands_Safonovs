@@ -1,0 +1,542 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"UserRegisterResponse": {
+				"properties": {
+					"is_success": {
+						"type": "boolean"
+					},
+					"confirmationUrl": {
+						"type": "string"
+					},
+					"error": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"is_success"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserRegisterRequest": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username",
+					"password",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserLoginResponse": {
+				"properties": {
+					"session_token": {
+						"type": "string"
+					},
+					"is_success": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"session_token",
+					"is_success"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UserLoginRequest": {
+				"properties": {
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"username",
+					"password"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoAddResponse": {
+				"properties": {
+					"is_success": {
+						"type": "boolean"
+					},
+					"task": {
+						"type": "string"
+					},
+					"session_id": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"is_success",
+					"task",
+					"session_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoAddRequest": {
+				"properties": {
+					"session_token": {
+						"type": "string"
+					},
+					"task": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"session_token",
+					"task"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"User": {
+				"properties": {
+					"user_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"username": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"is_confirmed": {
+						"type": "boolean"
+					},
+					"confirmation_uuid": {
+						"type": "string"
+					},
+					"session_token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"user_id",
+					"username",
+					"password",
+					"email",
+					"is_confirmed",
+					"confirmation_uuid",
+					"session_token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Todo": {
+				"properties": {
+					"todo_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"task": {
+						"type": "string"
+					},
+					"user_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"updated": {
+						"type": "string"
+					},
+					"is_deleted": {
+						"type": "boolean"
+					},
+					"user": {
+						"$ref": "#/components/schemas/User"
+					}
+				},
+				"required": [
+					"todo_id",
+					"task",
+					"user_id",
+					"updated",
+					"is_deleted"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoListResponse": {
+				"properties": {
+					"is_success": {
+						"type": "boolean"
+					},
+					"todos": {
+						"items": {
+							"$ref": "#/components/schemas/Todo"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"is_success",
+					"todos"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoListRequest": {
+				"properties": {
+					"session_token": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"session_token"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoRemoveResponse": {
+				"properties": {
+					"is_success": {
+						"type": "boolean"
+					},
+					"todo_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"is_success",
+					"todo_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoRemoveRequest": {
+				"properties": {
+					"session_token": {
+						"type": "string"
+					},
+					"todo_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"session_token",
+					"todo_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoUpdateResponse": {
+				"properties": {
+					"is_success": {
+						"type": "boolean"
+					},
+					"updated_task": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"is_success",
+					"updated_task"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"TodoUpdateRequest": {
+				"properties": {
+					"session_token": {
+						"type": "string"
+					},
+					"todo_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"task": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"session_token",
+					"todo_id",
+					"task"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "session_4_backend_leftovers",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/dummy/DummyFunction": {
+			"post": {
+				"operationId": "DummyFunction",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "input_name",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/register": {
+			"post": {
+				"operationId": "Register",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserRegisterResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserRegisterRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/users/confirmation/{uuid}": {
+			"get": {
+				"operationId": "GetUserConfirmation",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"is_confirmed": {
+											"type": "boolean"
+										}
+									},
+									"required": [
+										"is_confirmed"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "uuid",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users/login": {
+			"post": {
+				"operationId": "Login",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UserLoginResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UserLoginRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/todos/add": {
+			"post": {
+				"operationId": "AddTodo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TodoAddResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TodoAddRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/todos/list": {
+			"post": {
+				"operationId": "GetTodoList",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TodoListResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TodoListRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/todos/remove": {
+			"post": {
+				"operationId": "RemoveTodo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TodoRemoveResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TodoRemoveRequest"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/todos/update": {
+			"post": {
+				"operationId": "UpdateTodo",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/TodoUpdateResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TodoUpdateRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
