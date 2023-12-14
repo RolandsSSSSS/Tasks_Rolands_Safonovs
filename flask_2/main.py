@@ -16,8 +16,7 @@ def home():
 
     if params_GET.get("deleted"):
         message = 'Post deleted'
-
-    if params_GET.get("edited"):
+    elif params_GET.get("edited"):
         message = 'Post updated'
 
     return flask.render_template(

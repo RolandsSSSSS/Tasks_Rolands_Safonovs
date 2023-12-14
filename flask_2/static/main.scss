@@ -1,0 +1,65 @@
+/* node-sass static/main.scss -o static */
+$border-color: black;
+$font-color: #001BFF;
+
+html {
+    font-family: "Arial";
+}
+
+/* CSS Selectors */
+input, textarea {
+    border: 1px solid $border-color;
+    margin-bottom: 20px;
+}
+
+label, input, textarea {
+    display: block;
+}
+
+textarea {
+    height: 200px;
+}
+
+div {
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid $border-color;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #ddd;
+    color: $border-color;
+}
+
+.tableh{
+  th {
+    background-color: #BBBBBB;
+    color: $border-color;
+    text-align: center;
+    font-weight: bold;
+}
+}
+
+td {
+  a {
+    text-decoration: none;
+    color: #001BFF;
+    font-weight: bold;
+
+    &:hover {
+      color: #333;
+    }
+  }
+}

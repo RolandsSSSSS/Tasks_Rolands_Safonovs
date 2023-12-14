@@ -31,7 +31,7 @@ class ControllerDatabase:
                 cursor = conn.cursor()
                 cursor.execute(
                     "UPDATE posts SET (title, body, url_slug, modified) = "
-                    "(:title, :body, :url_slug, DATETIME('now', 'localtime')) WHERE post_id = :post_id",
+                    "(:title, :body, :url_slug, DATETIME()) WHERE post_id = :post_id",
                     post.__dict__
                 )
                 cursor.close()

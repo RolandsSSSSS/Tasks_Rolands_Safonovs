@@ -25,5 +25,9 @@
             </tr>
         {% endfor %}
     </table>
+    
+    <div>
+        <a href="{{ url_for('posts.post_edit', post_id='new') }}">Add new post</a>
+    </div>
 </body>
 </html>
