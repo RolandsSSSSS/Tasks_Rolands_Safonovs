@@ -73,6 +73,51 @@ div {
   font-size: 40px;
   font-variant: small-caps; }
 
+.post-body {
+  text-align: left;
+  font-size: 28px;
+  color: #000000; }
+
+/* delete poga */
+form.delete {
+  display: inline-block;
+  margin: 10px 0; }
+  form.delete input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px; }
+    form.delete input[type="submit"]:hover {
+      background-color: #FE4B4B; }
+
+/* Edit poga */
+div.edit {
+  display: inline-block;
+  margin: 10px 0; }
+  div.edit a.edit_button {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 10px 0;
+    text-decoration: none;
+    /* Remove default underline for links */
+    color: #FFFFFF;
+    background-color: #FF0000;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    /* Add a smooth transition effect */ }
+    div.edit a.edit_button:hover {
+      background-color: #FE4B4B; }
+
 .actionMsg {
   color: red; }
 

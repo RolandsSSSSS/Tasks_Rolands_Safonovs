@@ -7,6 +7,7 @@ $color-white: #FFFFFF;
 $color-orange: #F39C12;
 $color-light-gray: #B9B9B9;
 $color-dark-green: #3E523F;
+$color-light-red: #FE4B4B;
 
 $hover-color-dark-gray: #333;
 $table-color-light-gray: #E5E5E5;
@@ -110,6 +111,61 @@ div {
   font-size: 40px;
   font-variant: small-caps;
 }
+
+.post-body {
+  text-align: left;
+  font-size: 28px;
+  color: $color-black;
+}
+
+/* delete poga */
+form.delete {
+  display: inline-block;
+  margin: 10px 0;
+
+  input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-red;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-red;
+    }
+  }
+}
+
+/* Edit poga */
+div.edit{
+  display: inline-block;
+  margin: 10px 0;
+
+  a.edit_button {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 10px 0;
+    text-decoration: none; /* Remove default underline for links */
+    color: $color-white;
+    background-color: $color-red;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid $color-black;
+    border-radius: 5px;
+    transition: background-color 0.3s; /* Add a smooth transition effect */
+
+    &:hover {
+      background-color: $color-light-red;
+    }
+  }
+}
+
 
 .actionMsg {
   color: red;

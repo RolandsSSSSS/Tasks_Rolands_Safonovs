@@ -1,17 +1,22 @@
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
-    </head>
-    <body>
-        <h1>{{ post.title }}</h1>
-        <p>
-            {{ post.body }}
-        </p>
-        <form  action="{{ url_for('posts.post_edit') }}" method="POST">
-            <input type="hidden" value="delete" name="button_type" />
-            <input type="hidden" value="{{ post.post_id}}" name="post_id" />
-            <input type="submit" value="Delete" name="button_submit" />
-        </form>
-        <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}">Edit</a>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <div class="post-body">
+        <p>Body:</p>
+        <p>{{ post.body}}</p>
+    </div>
+    <form class="delete" action="{{ url_for('posts.post_edit') }}" method="POST">
+        <input type="hidden" value="delete" name="button_type" />
+        <input type="hidden" value="{{ post.post_id}}" name="post_id" />
+        <input type="submit" value="Delete" name="button_submit" />
+    </form>
+
+    <div class="edit">
+        <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}" class="edit_button">Edit</a>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

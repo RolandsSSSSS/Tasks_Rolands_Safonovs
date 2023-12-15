@@ -16,7 +16,9 @@
         </tr>
         {% for post in posts %}
             <tr>
-                <th>{{ post.title }}</th>
+                <td>
+                    <a href="{{ url_for('posts.post_view', url_slug=post.url_slug) }}">{{ post.title }}</a>
+                </td>
                 <th> {{ post.modified }}</th>
                 <td>
                     <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}">Edit</a>
