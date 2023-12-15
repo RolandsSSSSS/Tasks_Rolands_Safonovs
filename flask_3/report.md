@@ -20,6 +20,10 @@ un izdzēsu __connection jo to vairs nevajag:
 
 1.  Uzlaboju, main.scss, izveidoju base.html kur ir vienkārši base priekš visa(head, body, footer, header)
 
-   tad izmantoju to main.html
+   tad izmantoju to main.html, view.html un edit.html, šeit kā izskatas pārtaisītais view.html:
 
-2. 
+   ![image-20231215060900838](https://s2.loli.net/2023/12/15/kAx7wvpJLK3mqUd.png)
+
+2. Pievienoju index.html, un pievienoju controllerposts jaunu route index
+
+   ![image-20231215075002514](https://s2.loli.net/2023/12/15/fVI8BjKbgE1SDnA.png)
