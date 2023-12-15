@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* node-sass static/main.scss -o static */
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  color: #212121;
+  line-height: 1.5; }
+
+body {
+  margin: 0;
+  background-color: lightgray; }
+
+.container {
+  padding: 0 0.5rem; }
+
+/* galvene */
+header {
+  background: linear-gradient(135deg, #007b4d 0, #002e1e 100%) !important;
+  padding: 10px 0; }
+  header p {
+    color: #FFFFFF;
+    margin: 0; }
+    header p.lead {
+      font-size: 20px;
+      font-weight: bold;
+      font-variant: small-caps; }
+
+/* navigacija */
+nav {
+  background-color: #B9B9B9;
+  color: #3E523F;
+  padding: 10px; }
+  nav ul {
+    margin: 0;
+    padding: 0; }
+    nav ul li {
+      list-style-type: none;
+      display: inline-block; }
+      nav ul li::after {
+        content: "\2705"; }
+      nav ul li:last-child::after {
+        content: ""; }
+      nav ul li:first-child::before {
+        content: "\2705"; }
+      nav ul li a {
+        color: #F39C12; }
+
+/* kājene */
+footer {
+  background-color: #3E523F;
+  color: #FFFFFF;
+  padding: 10px 0;
+  margin-top: 40px;
+  font-variant: small-caps; }
+
+/* CSS Selectors */
+input, textarea {
+  border: 1px solid #000000;
+  margin-bottom: 20px;
+  font-variant: small-caps; }
+
+label, input, textarea {
+  display: block;
+  font-variant: small-caps; }
+
+textarea {
+  height: 200px;
+  font-variant: small-caps; }
+
+div {
+  font-weight: bold;
+  text-align: center;
+  font-size: 40px;
+  font-variant: small-caps; }
+
+.actionMsg {
+  color: red; }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse; }
+
+th, td {
+  border: 1px solid #000000;
+  padding: 12px;
+  text-align: left; }
+
+th {
+  background-color: #E5E5E5;
+  color: #000000; }
+
+.tableh th {
+  background-color: #BBBBBB;
+  color: #000000;
+  text-align: center;
+  font-weight: bold; }
+
+td a {
+  text-decoration: none;
+  color: #001BFF;
+  font-weight: bold; }
+  td a:hover {
+    color: #333; }
