@@ -9,6 +9,7 @@ $color-light-gray: #B9B9B9;
 $color-dark-green: #3E523F;
 $color-light-red: #FE4B4B;
 $color-light-blue: #6668FF;
+$color-medium-gray: #666;
 
 $hover-color-dark-gray: #333;
 $table-color-light-gray: #E5E5E5;
@@ -24,6 +25,7 @@ html {
 body {
   margin: 0;
   background-color: lightgray;
+  min-height: 100vh;
 }
 
 .container {
@@ -43,6 +45,7 @@ header {
       font-size: 20px;
       font-weight: bold;
       font-variant: small-caps;
+      color: $color-white;
     }
   }
 }
@@ -87,6 +90,12 @@ footer {
   padding: 10px 0;
   margin-top: 40px;
   font-variant: small-caps;
+
+  div {
+    p.footer {
+      color: $color-white;
+    }
+  }
 }
 
 /* CSS Selectors */
@@ -143,7 +152,7 @@ form.delete {
 }
 
 /* Edit poga */
-div.edit{
+div.edit {
   display: inline-block;
   margin: 10px 0;
 
@@ -241,6 +250,44 @@ td {
 
     &:hover {
       color: $hover-color-dark-gray;
+    }
+  }
+}
+
+/* Index page */
+body {
+  div {
+    &.page-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    &.page-item {
+      background-color: $color-white;
+      box-shadow: 0 2px 4px $color-black;
+      border-radius: 8px;
+      overflow: hidden;
+      flex: 1 0 calc(50% - 20px);
+      margin-bottom: 20px;
+    }
+
+    .page-item:hover {
+      box-shadow: 0 4px 8px $color-black;
+    }
+
+    .page-content {
+      padding: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: $hover-color-dark-gray;
+    }
+
+    p {
+      margin: 0;
+      color: $color-medium-gray;
     }
   }
 }
