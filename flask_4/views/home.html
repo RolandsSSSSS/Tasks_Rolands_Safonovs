@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <!-- Jinja Flask templating language -->
+    {% if message|length > 0 %}
+        <div class="actionMsg">{{ message }}</div>
+    {% endif %}
+
+    <table>
+        <tr class="tableh">
+            <th>Title</th>
+            <th>Updated</th>
+            <th>Action</th>
+        </tr>
+        {% for post in posts %}
+            <tr>
+                <td>
+                    <a href="{{ url_for('posts.post_view', url_slug=post.url_slug) }}">{{ post.title }}</a>
+                </td>
+                <th> {{ post.modified }}</th>
+                <td>
+                    <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}">Edit</a>
+                    /
+                    <a href="{{ url_for('posts.post_edit', post_id=post.post_id, button_type='delete') }}"
+                       onclick="return confirm('Are you sure you want to delete post with ID {{ post.post_id }}?');">Delete</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
+{% block footer %}{% endblock %}
