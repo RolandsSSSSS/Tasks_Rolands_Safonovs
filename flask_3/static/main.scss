@@ -8,6 +8,7 @@ $color-orange: #F39C12;
 $color-light-gray: #B9B9B9;
 $color-dark-green: #3E523F;
 $color-light-red: #FE4B4B;
+$color-light-blue: #6668FF;
 
 $hover-color-dark-gray: #333;
 $table-color-light-gray: #E5E5E5;
@@ -108,7 +109,7 @@ textarea {
 div {
   font-weight: bold;
   text-align: center;
-  font-size: 40px;
+  font-size: 20px;
   font-variant: small-caps;
 }
 
@@ -151,17 +152,51 @@ div.edit{
     font-variant: small-caps;
     display: inline-block;
     margin: 10px 0;
-    text-decoration: none; /* Remove default underline for links */
+    text-decoration: none;
     color: $color-white;
-    background-color: $color-red;
+    background-color: $color-blue;
     padding: 8px 30px;
     cursor: pointer;
     border: 2px solid $color-black;
     border-radius: 5px;
-    transition: background-color 0.3s; /* Add a smooth transition effect */
+    transition: background-color 0.3s;
 
     &:hover {
-      background-color: $color-light-red;
+      background-color: $color-light-blue;
+    }
+  }
+}
+
+form.edit_form {
+  text-align: left;
+  font-size: 16px;
+  color: $color-black;
+
+  input.edit_html, form.edit_form textarea.edit_html {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    text-transform: none;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"].edit_html {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-blue;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-blue;
     }
   }
 }
