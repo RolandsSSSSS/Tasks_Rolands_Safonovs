@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+    {% if post.post_id > 0 %}Update post{% else %}New post{% endif %}
+{% endblock %}
+
+{% block content %}
+    <form class="edit_form" action="{{ url_for('posts.post_edit', post_id=post.post_id) }}" method="POST">
+            <label>Title</label>
+            {% if post.post_id > 0 %}
+                <input type="text" name="post_title" value="{{ post.title }}" class="edit_html"/>
+            {% else %}
+                <input type="text" name="post_title" class="edit_html"/>
+            {% endif %}
+
+            <label>Body</label>
+            {% if post.post_id > 0 %}
+                <textarea name="post_body" class="edit_html">{{ post.body }}</textarea>
+            {% else %}
+                <textarea name="post_body" class="edit_html"></textarea>
+            {% endif %}
+
+            <label>Url slug</label>
+            {% if post.post_id > 0 %}
+                <input class="edit_html" type="text" name="url_slug" value="{{ post.url_slug }}" />
+            {% else %}
+                <input class="edit_html" type="text" name="url_slug" />
+            {% endif %}
+
+            <label class="label-parent">Parent</label>
+            <select name="parent_post_id">
+                {% for item in post_parent_id_by_title %}
+                    <option value="{{item[0] }}" {% if post.parent_post_id == item[0] %} selected="true" {% endif %}>{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+
+            <label class="label-tags">Tags</label>
+            {% if post.post_id > 0 %}
+                <div class="tags">
+                    {% for tag in tags %}
+                    {{ tag.label }}
+                    <input class="checkbox" type="checkbox" name="tags" value="{{ tag.tag_id }}"
+                           {% if post_tags_ids and tag.tag_id in post_tags_ids|map(attribute='tag_id') %} checked {% endif %}}>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="tags-message">
+                    <span>You can add tags later in "Edit"</span>
+                </div>
+            {% endif %}
+
+            {% if post.post_id > 0 %}
+                <input class="edit_html" type="hidden" value="edit" name="button_type" />
+            {% endif %}
+            <input type="hidden" value="{{ post.post_id }}" name="post_id" />
+            <input class="edit_html" type="submit" value="{% if post.post_id > 0 %}Update{% else %}Save{% endif %}" />
+        </form>
+{% endblock %}
+
+{% block footer %}{% endblock %}
