@@ -33,11 +33,15 @@ body {
 
   form.edit_form{
     label.label-tags{
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     label.label-parent{
       margin-top: 15px;
+    }
+
+    textarea.edit_html{
+      font-size: 20px;
     }
   }
 }
@@ -111,7 +115,6 @@ footer {
 /* CSS Selectors */
 input, textarea {
   border: 1px solid $color-black;
-  margin-bottom: 20px;
   font-variant: small-caps;
 }
 
@@ -147,11 +150,29 @@ div {
     color: $color-black;
   }
 
-  div.tags{
-    font-weight: normal;
-    text-align: left;
-    font-size: 15px;
-    font-variant: small-caps;
+  div{
+    &.tags {
+      display: flex;
+      text-align: center;
+      flex-wrap: wrap;
+      margin-right: 20px;
+    }
+
+    &.tags-list {
+      flex: 1 0 calc(14.28% - 20px);
+      margin: 11px 12px 13px 14px;
+
+      div {
+        font-weight: normal;
+        text-align: left;
+        font-size: 15px;
+        font-variant: small-caps;
+      }
+    }
+
+    &.page-content {
+      padding: 20px;
+    }
   }
 }
 
@@ -161,13 +182,34 @@ div {
   text-align: left;
   font-size: 17px;
   color: $color-red;
-
 }
 
 /* delete poga */
 form.delete {
   display: inline-block;
   margin: 10px 0;
+
+  input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-red;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-red;
+    }
+  }
+}
+
+form.delete-home {
+  display: inline-block;
+  margin: 0;
 
   input[type="submit"] {
     font-weight: bold;
@@ -197,6 +239,30 @@ div.edit {
     font-variant: small-caps;
     display: inline-block;
     margin: 10px 0;
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-blue;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid $color-black;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $color-light-blue;
+    }
+  }
+}
+
+div.edit-home {
+  display: inline-block;
+  margin: 0;
+
+  a.edit_button-home {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 0;
     text-decoration: none;
     color: $color-white;
     background-color: $color-blue;
@@ -243,6 +309,15 @@ form.edit_form {
     &:hover {
       background-color: $color-light-blue;
     }
+  }
+  input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 0 0 0 25px;
+    padding: initial;
+    border: initial;
   }
 }
 

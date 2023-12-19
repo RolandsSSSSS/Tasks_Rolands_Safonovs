@@ -21,10 +21,15 @@
                 </td>
                 <th> {{ post.modified }}</th>
                 <td>
-                    <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}">Edit</a>
+                    <div class="edit-home">
+                        <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}" class="edit_button-home">Edit</a>
+                    </div>
                     /
-                    <a href="{{ url_for('posts.post_edit', post_id=post.post_id, button_type='delete', method='POST') }}"
-                       onclick="return confirm('Are you sure you want to delete post with ID {{ post.post_id }}?');">Delete</a>
+                    <form class="delete-home" action="{{ url_for('posts.post_edit') }}" method="POST">
+                        <input type="hidden" value="delete" name="button_type" />
+                        <input type="hidden" value="{{ post.post_id}}" name="post_id" />
+                        <input type="submit" value="Delete" name="button_submit" />
+                    </form>
                 </td>
 
             </tr>

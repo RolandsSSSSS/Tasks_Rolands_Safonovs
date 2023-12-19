@@ -14,9 +14,11 @@ body {
 .container {
   padding: 0 0.5rem; }
   .container form.edit_form label.label-tags {
-    margin-top: 20px; }
+    margin-top: 10px; }
   .container form.edit_form label.label-parent {
     margin-top: 15px; }
+  .container form.edit_form textarea.edit_html {
+    font-size: 20px; }
 
 /* galvene */
 header {
@@ -64,7 +66,6 @@ footer {
 /* CSS Selectors */
 input, textarea {
   border: 1px solid #000000;
-  margin-bottom: 20px;
   font-variant: small-caps; }
 
 label, input, textarea {
@@ -91,10 +92,20 @@ div {
     text-align: left;
     color: #000000; }
   div div.tags {
-    font-weight: normal;
-    text-align: left;
-    font-size: 15px;
-    font-variant: small-caps; }
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    margin-right: 20px; }
+  div div.tags-list {
+    flex: 1 0 calc(14.28% - 20px);
+    margin: 11px 12px 13px 14px; }
+    div div.tags-list div {
+      font-weight: normal;
+      text-align: left;
+      font-size: 15px;
+      font-variant: small-caps; }
+  div div.page-content {
+    padding: 20px; }
 
 .tags-message {
   margin-bottom: 20px;
@@ -121,6 +132,23 @@ form.delete {
     form.delete input[type="submit"]:hover {
       background-color: #FE4B4B; }
 
+form.delete-home {
+  display: inline-block;
+  margin: 0; }
+  form.delete-home input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #FF0000;
+    color: #FFFFFF;
+    border: 2px solid #000000;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px; }
+    form.delete-home input[type="submit"]:hover {
+      background-color: #FE4B4B; }
+
 /* Edit poga */
 div.edit {
   display: inline-block;
@@ -139,6 +167,25 @@ div.edit {
     border-radius: 5px;
     transition: background-color 0.3s; }
     div.edit a.edit_button:hover {
+      background-color: #6668FF; }
+
+div.edit-home {
+  display: inline-block;
+  margin: 0; }
+  div.edit-home a.edit_button-home {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 0;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #001BFF;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    transition: background-color 0.3s; }
+    div.edit-home a.edit_button-home:hover {
       background-color: #6668FF; }
 
 form.edit_form {
@@ -167,6 +214,14 @@ form.edit_form {
     border-radius: 5px; }
     form.edit_form input[type="submit"].edit_html:hover {
       background-color: #6668FF; }
+  form.edit_form input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 0 0 0 25px;
+    padding: initial;
+    border: initial; }
 
 .actionMsg {
   color: red; }
