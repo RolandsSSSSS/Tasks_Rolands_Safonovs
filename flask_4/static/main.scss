@@ -1,0 +1,425 @@
+/* node-sass static/main.scss -o static */
+$color-black: #000000;
+$color-blue: #001BFF;
+$color-red: #FF0000;
+$color-gray: #BBBBBB;
+$color-white: #FFFFFF;
+$color-orange: #F39C12;
+$color-light-gray: #B9B9B9;
+$color-dark-green: #3E523F;
+$color-light-red: #FE4B4B;
+$color-light-blue: #6668FF;
+$color-medium-gray: #666;
+
+$hover-color-dark-gray: #333;
+$table-color-light-gray: #E5E5E5;
+
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  color: #212121;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background-color: lightgray;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 0 0.5rem;
+
+  form.edit_form{
+    label.label-tags{
+      margin-top: 10px;
+    }
+
+    label.label-parent{
+      margin-top: 15px;
+    }
+
+    textarea.edit_html{
+      font-size: 20px;
+    }
+  }
+}
+
+/* galvene */
+header {
+  background: linear-gradient(135deg, rgba(0, 123, 77, 1) 0, rgba(0, 46, 30, 1) 100%) !important;
+  padding: 10px 0;
+
+  p {
+    color: $color-white;
+    margin: 0;
+
+    &.lead {
+      font-size: 20px;
+      font-weight: bold;
+      font-variant: small-caps;
+      color: $color-white;
+    }
+  }
+}
+
+/* navigacija */
+nav {
+  background-color: $color-light-gray;
+  color: $color-dark-green;
+  padding: 10px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      display: inline-block;
+
+      &::after {
+        content: "\2705";
+      }
+
+      &:last-child::after {
+        content: "";
+      }
+
+      &:first-child::before {
+        content: "\2705";
+      }
+
+      a {
+        color: $color-orange;
+      }
+    }
+  }
+}
+
+/* kājene */
+footer {
+  background-color: $color-dark-green;
+  color: $color-white;
+  padding: 10px 0;
+  margin-top: 40px;
+  font-variant: small-caps;
+
+  div {
+    p.footer {
+      color: $color-white;
+    }
+  }
+}
+
+/* CSS Selectors */
+input, textarea {
+  border: 1px solid $color-black;
+  font-variant: small-caps;
+}
+
+label, input, textarea {
+  display: block;
+  font-variant: small-caps;
+}
+
+textarea {
+  height: 200px;
+  font-variant: small-caps;
+}
+
+div {
+  font-weight: bold;
+  text-align: center;
+  font-size: 20px;
+  font-variant: small-caps;
+
+  &.post-body {
+    text-align: left;
+    font-size: 28px;
+    color: $color-black;
+
+    p.edit_color{
+      color: $color-black;
+    }
+
+    p.edit_color-text{
+      color: $color-black;
+      font-size: 20px;
+    }
+  }
+
+  &.post-t_uuid {
+    margin-top: 10px;
+    text-align: left;
+    font-size: 28px;
+    color: $color-black;
+
+    p.edit_color{
+      color: $color-black;
+    }
+
+    p.edit_color-text{
+      color: $color-black;
+      font-size: 20px;
+    }
+  }
+
+  &.post-parent{
+    margin-top: 20px;
+    text-align: left;
+    color: $color-black;
+  }
+
+  div{
+    &.tags {
+      display: flex;
+      text-align: center;
+      flex-wrap: wrap;
+      margin-right: 20px;
+    }
+
+    &.tags-list {
+      flex: 1 0 calc(14.28% - 20px);
+      margin: 11px 12px 13px 14px;
+
+      div {
+        font-weight: normal;
+        text-align: left;
+        font-size: 15px;
+        font-variant: small-caps;
+      }
+    }
+
+    &.page-content {
+      padding: 20px;
+    }
+  }
+}
+
+.tags-message{
+  margin-bottom: 20px;
+  font-weight: normal;
+  text-align: left;
+  font-size: 17px;
+  color: $color-red;
+}
+
+/* delete poga */
+form.delete {
+  display: inline-block;
+  margin: 10px 0;
+
+  input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-red;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-red;
+    }
+  }
+}
+
+form.delete-home {
+  display: inline-block;
+  margin: 0;
+
+  input[type="submit"] {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-red;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-red;
+    }
+  }
+}
+
+/* Edit poga */
+div.edit {
+  display: inline-block;
+  margin: 10px 0;
+
+  a.edit_button {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-blue;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid $color-black;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $color-light-blue;
+    }
+  }
+}
+
+div.edit-home {
+  display: inline-block;
+  margin: 0;
+
+  a.edit_button-home {
+    font-size: 15px;
+    font-variant: small-caps;
+    display: inline-block;
+    margin: 0;
+    text-decoration: none;
+    color: $color-white;
+    background-color: $color-blue;
+    padding: 8px 30px;
+    cursor: pointer;
+    border: 2px solid $color-black;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $color-light-blue;
+    }
+  }
+}
+
+form.edit_form {
+  text-align: left;
+  font-size: 16px;
+  color: $color-black;
+
+  input.edit_html, form.edit_form textarea.edit_html {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    text-transform: none;
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"].edit_html {
+    font-weight: bold;
+    font-size: 15px;
+    background-color: $color-blue;
+    color: $color-white;
+    border: 2px solid $color-black;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $color-light-blue;
+    }
+  }
+  input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 0 0 0 25px;
+    padding: initial;
+    border: initial;
+  }
+}
+
+
+.actionMsg {
+  color: red;
+}
+
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid $color-black;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: $table-color-light-gray;
+  color: $color-black;
+}
+
+.tableh {
+  th {
+    background-color: $color-gray;
+    color: $color-black;
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
+td {
+  a {
+    text-decoration: none;
+    color: $color-blue;
+    font-weight: bold;
+
+    &:hover {
+      color: $hover-color-dark-gray;
+    }
+  }
+}
+
+/* Index page */
+body {
+  div {
+    &.page-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    &.page-item {
+      background-color: $color-white;
+      box-shadow: 0 2px 4px $color-black;
+      border-radius: 8px;
+      overflow: hidden;
+      flex: 1 0 calc(50% - 20px);
+      margin-bottom: 20px;
+    }
+
+    .page-item:hover {
+      box-shadow: 0 4px 8px $color-black;
+    }
+
+    .page-content {
+      padding: 20px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: $hover-color-dark-gray;
+    }
+
+    p {
+      margin: 0;
+      color: $color-medium-gray;
+    }
+  }
+}

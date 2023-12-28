@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <div class="post-body">
+        <p class="edit_color">Body:</p>
+        <p class="edit_color-text">{{ post.body}}</p>
+    </div>
+
+    <div class="post-t_uuid">
+        <p class="edit_color">t_uuid:</p>
+        <p class="edit_color-text">{{ post.thumbnail_uuid }}</p>
+    </div>
+
+
+    <div class="post-parent">
+        <span>Parent ID:</span>
+        <span>{{ post.parent_post_id }}</span>
+    </div>
+
+    <div>
+        <h1>Tags:</h1>
+        {% for tag in post_tags %}
+            <span style="margin-right: 20px">#{{ tag.label }}</span>
+        {% endfor %}
+    </div>
+    <form class="delete" action="{{ url_for('posts.post_edit') }}" method="POST">
+        <input type="hidden" value="delete" name="button_type" />
+        <input type="hidden" value="{{ post.post_id}}" name="post_id" />
+        <input type="submit" value="Delete" name="button_submit" />
+    </form>
+
+    <div class="edit">
+        <a href="{{ url_for('posts.post_edit', post_id=post.post_id) }}" class="edit_button">Edit</a>
+    </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
