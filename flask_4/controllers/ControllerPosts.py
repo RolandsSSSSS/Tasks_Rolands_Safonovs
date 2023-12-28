@@ -18,6 +18,7 @@ class ControllerPosts:
     @blueprint.route("/new", methods=["POST", "GET"])
     @blueprint.route("/edit/<post_id>", methods=["POST", "GET"])
     def post_edit(post_id=0):
+        attachment_model = [0, "null", "null"]
         post = ModelPost()
         tags = ControllerDatabase.get_all_tags()
         post_tags_ids = ControllerDatabase.get_post_tags(post_id)
@@ -78,14 +79,10 @@ class ControllerPosts:
                 post.parent_post_id = None
 
             attachment = request.files['attachment']
+            filename = secure_filename(attachment.filename)
+            attachment_path = os.path.join('./files', filename)
+            attachment.save(attachment_path)
             if attachment:
-                filename = secure_filename(attachment.filename)
-                attachment_path = os.path.join('./files', filename)
-                attachment.save(attachment_path)
-
-                if button_type != "edit":
-                    post_id = ControllerDatabase.insert_post(post)
-
                 attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
 
                 if button_type == "edit" and post_id > 0:
@@ -95,14 +92,14 @@ class ControllerPosts:
                         ControllerDatabase.update_attachment(attachment_model)
                     else:
                         ControllerDatabase.insert_attachment(attachment_model)
-                else:
-                    ControllerDatabase.insert_attachment(attachment_model)
 
             if button_type == "edit":
                 ControllerDatabase.update_post(post)
                 return redirect(f"/?edited={post.url_slug}")
             else:
                 post_id = ControllerDatabase.insert_post(post)
+                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+                ControllerDatabase.insert_attachment(attachment_model)
 
             return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 
