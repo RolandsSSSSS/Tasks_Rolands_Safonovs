@@ -83,6 +83,9 @@ class ControllerPosts:
                 attachment_path = os.path.join('./files', filename)
                 attachment.save(attachment_path)
 
+                if button_type != "edit":
+                    post_id = ControllerDatabase.insert_post(post)
+
                 attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
 
                 if button_type == "edit" and post_id > 0:
