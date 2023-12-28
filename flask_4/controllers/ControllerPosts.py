@@ -128,13 +128,4 @@ class ControllerPosts:
     @staticmethod
     @blueprint.route("/index")
     def index():
-        pages = [
-            {"title": "Home Page", "description": "In this page you can see all posts, edit, update and delete them"},
-            {"title": "New Post Page", "description": "In this page you can add new post"},
-            {"title": "Edit Post Page", "description": "In this page you can update post"},
-            {"title": "View Post Page", "description": "In this page you can see post title and body, as well you can "
-                                                       "delete or update from this page"},
-            {"title": "Index Page", "description": "In this page you can see all pages in this project, you are in it "
-                                                   "now."},
-        ]
-        return flask.render_template("index.html", pages=pages)
+        return flask.render_template("index.html")
