@@ -77,12 +77,6 @@ class ControllerPosts:
             except:
                 post.parent_post_id = None
 
-            if button_type == "edit":
-                ControllerDatabase.update_post(post)
-                return redirect(f"/?edited={post.url_slug}")
-            else:
-                post_id = ControllerDatabase.insert_post(post)
-
             attachment = request.files['attachment']
             if attachment:
                 filename = secure_filename(attachment.filename)
@@ -100,6 +94,12 @@ class ControllerPosts:
                         ControllerDatabase.insert_attachment(attachment_model)
                 else:
                     ControllerDatabase.insert_attachment(attachment_model)
+
+            if button_type == "edit":
+                ControllerDatabase.update_post(post)
+                return redirect(f"/?edited={post.url_slug}")
+            else:
+                post_id = ControllerDatabase.insert_post(post)
 
             return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 
