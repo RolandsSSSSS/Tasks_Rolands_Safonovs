@@ -59,8 +59,9 @@
                 </div>
             {% endif %}
 
-            <label for="attachment">Attachment</label>
-            <input type="file" name="attachment" id="attachment" />
+            <label>Attachment</label>
+            <input class="attachment" type="file" name="attachment" id="attachment" >
+            <label class="attachment-input-label" id="attachment-input-label" for="attachment">Select pdf file</label>
 
             {% if post.post_id > 0 %}
                 <input class="edit_html" type="hidden" value="edit" name="button_type" />

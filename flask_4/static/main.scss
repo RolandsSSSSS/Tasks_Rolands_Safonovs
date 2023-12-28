@@ -40,6 +40,20 @@ body {
       margin-top: 15px;
     }
 
+    input.attachment {
+      display: none;
+    }
+
+    label.attachment-input-label{
+      text-align: left;
+      font-size: 20px;
+      padding: 5px 10px;
+      border: 2px solid black;
+      border-radius: 1%;
+      margin-bottom: 10px;
+      background-color: $color-light-gray;
+    }
+
     textarea.edit_html{
       font-size: 20px;
     }

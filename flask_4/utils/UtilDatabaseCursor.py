@@ -3,7 +3,7 @@ import sqlite3
 class UtilDatabaseCursor:
     def __init__(self): # instance = UtilDatabaseCursor()
         super().__init__()
-        self.conn = sqlite3.connect("./blog.sqlite2")
+        self.conn = sqlite3.connect("./blog.sqlite")
         self.cursor = None
 
     def __enter__(self): # with instance as something:
