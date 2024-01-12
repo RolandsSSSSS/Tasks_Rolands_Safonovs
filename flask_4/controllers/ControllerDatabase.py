@@ -141,7 +141,8 @@ class ControllerDatabase:
         return posts_flat
 
     @staticmethod
-    def get_post_tags(post_id):
+    def get_post_tags(post_id: int) -> List[ModelTag]:
+        tags = []
         try:
             with UtilDatabaseCursor() as cursor:
                 cursor.execute(
@@ -151,12 +152,11 @@ class ControllerDatabase:
                     [post_id, ]
                 )
 
-                tags = [{"tag_id": tag_id, "label": label} for tag_id, label in cursor.fetchall()]
-                return tags
+                tags = [ModelTag(tag_id, label) for tag_id, label in cursor.fetchall()]
 
         except Exception as exc:
             print(exc)
-            return []
+        return tags
 
     @staticmethod
     def get_all_tags() -> List[ModelTag]:

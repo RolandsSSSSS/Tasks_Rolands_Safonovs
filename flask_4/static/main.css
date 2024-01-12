@@ -137,6 +137,11 @@ div {
   font-size: 17px;
   color: #FF0000; }
 
+.tags-warning {
+  color: #FF0000;
+  text-align: center;
+  font-size: 14px; }
+
 /* delete poga */
 form.delete {
   display: inline-block;

@@ -82,24 +82,42 @@ class ControllerPosts:
             filename = secure_filename(attachment.filename)
             attachment_path = os.path.join('./files', filename)
             attachment.save(attachment_path)
-            if attachment:
+
+            if attachment and (button_type == "edit" and post_id > 0):
                 attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+                existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
+                if existing_attachment:
+                    attachment_model.attachment_id = existing_attachment[0].attachment_id
+                    ControllerDatabase.update_attachment(attachment_model)
+                else:
+                    ControllerDatabase.insert_attachment(attachment_model)
 
-                if button_type == "edit" and post_id > 0:
-                    existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
-                    if existing_attachment:
-                        attachment_model.attachment_id = existing_attachment[0].attachment_id
-                        ControllerDatabase.update_attachment(attachment_model)
-                    else:
-                        ControllerDatabase.insert_attachment(attachment_model)
+                ControllerDatabase.update_post(post) if button_type == "edit" else ControllerDatabase.insert_post(post)
 
-            if button_type == "edit":
-                ControllerDatabase.update_post(post)
                 return redirect(f"/?edited={post.url_slug}")
-            else:
-                post_id = ControllerDatabase.insert_post(post)
-                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
-                ControllerDatabase.insert_attachment(attachment_model)
+
+            post_id = ControllerDatabase.insert_post(post)
+            attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+            ControllerDatabase.insert_attachment(attachment_model)
+
+            # if attachment:
+            #     attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+            #
+            #     if button_type == "edit" and post_id > 0:
+            #         existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
+            #         if existing_attachment:
+            #             attachment_model.attachment_id = existing_attachment[0].attachment_id
+            #             ControllerDatabase.update_attachment(attachment_model)
+            #         else:
+            #             ControllerDatabase.insert_attachment(attachment_model)
+            #
+            # if button_type == "edit":
+            #     ControllerDatabase.update_post(post)
+            #     return redirect(f"/?edited={post.url_slug}")
+            # else:
+            #     post_id = ControllerDatabase.insert_post(post)
+            #     attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+            #     ControllerDatabase.insert_attachment(attachment_model)
 
             return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 

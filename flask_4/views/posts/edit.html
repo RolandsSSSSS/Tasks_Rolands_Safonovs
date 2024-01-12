@@ -60,7 +60,8 @@
             {% endif %}
 
             <label>Attachment</label>
-            <input class="attachment" type="file" name="attachment" id="attachment" >
+            <input class="attachment" type="file" name="attachment" id="attachment" required>
+            <label class="tags-warning">PDF file is required!</label>
             <label class="attachment-input-label" id="attachment-input-label" for="attachment">Select pdf file</label>
 
             {% if post.post_id > 0 %}
