@@ -54,12 +54,13 @@ export const ComponentHabit = (props: Props): React.JSX.Element => {
 							onValueChange={(value) => setNumber_of_times_in_week(value)}
 							items={numberOfTimes}
 							value={1}
+							placeholder={{ label: "Times per week..."}}
 						/>
 					</View>
 				) : (
 					<View>
 						<Text>{habitDesc}</Text>
-						<Text>{number_of_times_in_week}</Text>
+						<Text>{`Times per week: ${number_of_times_in_week}`}</Text>
 					</View>
 				)}
 			</View>
