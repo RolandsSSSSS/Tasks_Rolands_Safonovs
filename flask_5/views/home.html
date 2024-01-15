@@ -16,7 +16,7 @@
         </tr>
         {% for post in posts %}
             <tr>
-                <td style="padding-left: {{ 30 * post.depth }}px">
+                <td style="padding-left: {{ 10 + 30 * post.depth }}px">
                     <a href="{{ url_for('posts.post_view', url_slug=post.url_slug) }}">{{ post.title }}</a>
                 </td>
                 <th> {{ post.modified }}</th>
