@@ -217,5 +217,7 @@ instance/*
 !instance/.gitignore
 .webassets-cache
 
+files/*.pdf
+
 
 
