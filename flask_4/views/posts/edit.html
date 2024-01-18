@@ -47,7 +47,12 @@
                     <div class="tags-list">
                         <div class="tags-content">
                             <input class="checkbox" type="checkbox" name="tags" value="{{ tag.tag_id }}"
-                               {% if post_tags_ids and tag.tag_id in post_tags_ids|map(attribute='tag_id') %} checked {% endif %}} />
+                                {% for post_tag_id in post_tags_ids %}
+                                    {% if tag.tag_id == post_tag_id.tag_id %}
+                                        checked
+                                    {% endif %}
+                                {% endfor %}
+                            />
                             <div>{{ tag.label }}</div>
                         </div>
                     </div>

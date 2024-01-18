@@ -166,10 +166,12 @@ class ControllerDatabase:
                 cursor.execute(
                     f"SELECT * FROM tags"
                 )
-                for (tag_id, label) in cursor.fetchall():
+                for (tag_id, label, created, is_deleted) in cursor.fetchall():
                     tag = ModelTag()
                     tag.tag_id = tag_id
                     tag.label = label
+                    tag.created = created
+                    tag.is_deleted = is_deleted
                     tags.append(tag)
 
         except Exception as exc:
