@@ -26,4 +26,6 @@
 
 7. un tad returna pievienoju kad notiek editošana, tad ir iespeja mainit number_of_times_in_week, kur limits ir no 1 līdz 10, kad nav editošana tad vienkārši parāda šo number_of_times_in_week kā text:
 
-8. ![image-20240119151734997](https://s2.loli.net/2024/01/19/LqQat7wNKRzTPke.png)
+   ![image-20240119151734997](https://s2.loli.net/2024/01/19/LqQat7wNKRzTPke.png)
+
+8. 

@@ -65,7 +65,6 @@ class ControllerPosts:
             post.title = request.form.get('post_title').strip()
             post.body = request.form.get('post_body').strip()
             post.url_slug = request.form.get('url_slug').strip()
-            post.thumbnail_uuid = request.form.get('thumbnail_uuid')
 
             if button_type != "edit" and not post.thumbnail_uuid:
                 post.thumbnail_uuid = str(uuid.uuid4())
