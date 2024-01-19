@@ -16,4 +16,14 @@
 
    ![image-20240119143623580](https://s2.loli.net/2024/01/19/sNYftXworUP8BLD.png)
 
-5. 
+5. pievienoju lai varētu redzēt un ievadīt number_of_times_in_week ar InputText, sākumā izveidoju useState:
+
+   ![image-20240119150910885](https://s2.loli.net/2024/01/19/1cWQNJpvdjxn42q.png)
+
+6. tad pievienoju number_of_times_in_week pie onSaveHabit:
+
+   ![image-20240119151106060](https://s2.loli.net/2024/01/19/TjGSMOazgVeIsm7.png)
+
+7. un tad returna pievienoju kad notiek editošana, tad ir iespeja mainit number_of_times_in_week, kur limits ir no 1 līdz 10, kad nav editošana tad vienkārši parāda šo number_of_times_in_week kā text:
+
+8. ![image-20240119151734997](https://s2.loli.net/2024/01/19/LqQat7wNKRzTPke.png)
