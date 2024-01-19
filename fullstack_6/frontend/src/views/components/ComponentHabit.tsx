@@ -11,6 +11,9 @@ interface Props {
 export const ComponentHabit = (props: Props): React.JSX.Element => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [habitDesc, sethabitDesc] = useState(props.habit.description);
+	const [number_of_times_in_week, setNumber_of_times_in_week] = useState(
+		props.habit.number_of_times_in_week,
+	);
 
 	const onEditPress = () => {
 		setIsEditing(true);
@@ -21,6 +24,7 @@ export const ComponentHabit = (props: Props): React.JSX.Element => {
 		if (props.onHabitChange) {
 			props.onHabitChange({
 				...props.habit,
+				number_of_times_in_week: number_of_times_in_week,
 				description: habitDesc.trim(),
 			} as habit);
 		}
@@ -45,9 +49,21 @@ export const ComponentHabit = (props: Props): React.JSX.Element => {
 					paddingLeft: 10,
 				}}>
 				{isEditing ? (
-					<TextInput onChangeText={(text) => sethabitDesc(text)}>{habitDesc}</TextInput>
+					<View>
+						<TextInput onChangeText={(text) => sethabitDesc(text)}>{habitDesc}</TextInput>
+						<TextInput
+							onChangeText={(text) => {
+								const number = parseInt(text, 10);
+								setNumber_of_times_in_week(Math.min(10, Math.max(1, number)));
+							}}>
+							{number_of_times_in_week}
+						</TextInput>
+					</View>
 				) : (
-					<Text>{habitDesc}</Text>
+					<View>
+						<Text>{habitDesc}</Text>
+						<Text>{number_of_times_in_week}</Text>
+					</View>
 				)}
 			</View>
 			{isEditing ? (
