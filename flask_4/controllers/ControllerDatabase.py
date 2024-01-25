@@ -201,8 +201,8 @@ class ControllerDatabase:
         try:
             with UtilDatabaseCursor() as cursor:
                 cursor.execute(
-                    "INSERT INTO attachments (post_id, file_name, file_path) "
-                    "VALUES (:post_id, :file_name, :file_path);",
+                    "INSERT INTO attachments (post_id, file_name, file_path, thumbnail_uuid) "
+                    "VALUES (:post_id, :file_name, :file_path, :thumbnail_uuid);",
                     attachment.__dict__
                 )
         except Exception as exc:
@@ -235,7 +235,8 @@ class ControllerDatabase:
                         attachment.attachment_id,
                         attachment.post_id,
                         attachment.file_name,
-                        attachment.file_path
+                        attachment.file_path,
+                        attachment.thumbnail_uuid
                     ) = row
                     attachments.append(attachment)
         except Exception as exc:

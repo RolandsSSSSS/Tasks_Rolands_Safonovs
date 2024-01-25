@@ -28,7 +28,6 @@ class ControllerPosts:
         if post_id is not None:
             post = ControllerDatabase.get_post(post_id)
 
-
         post_flat = ControllerDatabase.get_all_posts_flattened(exclude_branch_post_id=post_id)
         post_parent_id_by_title = [
             (None, "No parent")
@@ -66,9 +65,6 @@ class ControllerPosts:
             post.body = request.form.get('post_body').strip()
             post.url_slug = request.form.get('url_slug').strip()
 
-            if button_type != "edit" and not post.thumbnail_uuid:
-                post.thumbnail_uuid = str(uuid.uuid4())
-
             selected_tags_ids = request.form.getlist('tags')
             ControllerDatabase.update_post_tags(post_id, selected_tags_ids)
 
@@ -78,12 +74,15 @@ class ControllerPosts:
                 post.parent_post_id = None
 
             attachment = request.files['attachment']
+            if attachment and (button_type == "edit" and post_id > 0):
+                post.thumbnail_uuid = str(uuid.uuid4())
             filename = secure_filename(attachment.filename)
-            attachment_path = os.path.join('./files', filename)
+            attachment_path = os.path.join('./static/thumbnails', filename)
+            attachment_uuid = post.thumbnail_uuid
             attachment.save(attachment_path)
 
             if attachment and (button_type == "edit" and post_id > 0):
-                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path, thumbnail_uuid=attachment_uuid)
                 existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
                 if existing_attachment:
                     attachment_model.attachment_id = existing_attachment[0].attachment_id

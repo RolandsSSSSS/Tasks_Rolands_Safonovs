@@ -9,6 +9,17 @@
         <p class="edit_color-text">{{ post.body}}</p>
     </div>
 
+    <h3>Thumbnail</h3>
+    <div class="post-thumbnail">
+        {% if post.attachments %}
+            {% for attachment in post.attachments %}
+                <img src="{{ url_for('static', filename='thumbnails/' + attachment.file_name) }}" alt="Thumbnail IMG">
+            {% endfor %}
+        {% else %}
+            <p class="edit_color-text">Thumbnail not found</p>
+        {% endif %}
+    </div>
+
     <div class="post-t_uuid">
         <p class="edit_color">t_uuid:</p>
         <p class="edit_color-text">{{ post.thumbnail_uuid }}</p>
