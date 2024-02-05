@@ -13,13 +13,11 @@
           </td>
           <td style="text-align: center">
             {% if post.attachments %}
-              {% for attachment in post.attachments %}
-                {{ post.attachments }}
-                {{ post.post_id }}
-                {{ attachment.post_id }}
-<!--                {% if post.thumbnail_uuid == attachment.thumbnail_uuid %}-->
-                <img src="{{ url_for('static', filename='thumbnails/' + attachment.file_name) }}" alt="Thumbnail IMG" width="80" height="80">
-<!--                {% endif %}-->
+              {% for attachment in attachments %}
+                {% if post.thumbnail_uuid == attachment.thumbnail_uuid %}
+                  <img src="{{ url_for('static', filename='thumbnails/' + attachment.file_name) }}" alt="Thumbnail IMG"
+                       width="80" height="80">
+                {% endif %}
               {% endfor %}
             {% else %}
               Thumbnail not found

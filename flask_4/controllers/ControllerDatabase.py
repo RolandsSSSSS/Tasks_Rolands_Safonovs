@@ -1,6 +1,6 @@
 from typing import List
 
-from models import ModelAttachment
+from models.ModelAttachment import ModelAttachment
 from models.ModelPost import ModelPost
 import sqlite3
 
@@ -197,7 +197,7 @@ class ControllerDatabase:
             print(exc)
 
     @staticmethod
-    def get_all_attachments():
+    def get_all_attachments() -> List[ModelAttachment]:
         attachments = []
         try:
             with UtilDatabaseCursor() as cursor:
@@ -205,7 +205,7 @@ class ControllerDatabase:
                     f"SELECT * FROM attachments"
                 )
                 for (attachment_id, post_id, file_name, file_path, thumbnail_uuid) in cursor.fetchall():
-                    attachment = ModelAttachment
+                    attachment = ModelAttachment()
                     attachment.attachment_id = attachment_id
                     attachment.post_id = post_id
                     attachment.file_name = file_name
