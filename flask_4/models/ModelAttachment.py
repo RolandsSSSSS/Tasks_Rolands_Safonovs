@@ -9,5 +9,3 @@ class ModelAttachment:
     file_name: str = ""
     file_path: str = ""
     thumbnail_uuid: str = ""
-
-    post = relationship("ModelPost", back_populates="attachments")

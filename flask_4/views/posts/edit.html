@@ -26,13 +26,7 @@
             {% else %}
                 <input class="edit_html" type="text" name="url_slug" />
             {% endif %}
-            <!--
-            {% if post.post_id > 0 %}
-                <label>Thumbnail uuid</label>
-                <input class="edit_html" type="text" name="thumbnail_uuid" value="{{ post.thumbnail_uuid }}" />
-            {% else %}
-            {% endif %}
-            -->
+
             <label class="label-parent">Parent</label>
             <select name="parent_post_id">
                 {% for item in post_parent_id_by_title %}

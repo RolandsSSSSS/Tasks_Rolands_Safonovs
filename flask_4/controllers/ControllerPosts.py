@@ -69,6 +69,8 @@ class ControllerPosts:
             attachment_path = os.path.join('./static/thumbnails', filename)
             attachment_uuid = str(uuid.uuid4())
             attachment.save(attachment_path)
+            if button_type != "edit":
+                post.thumbnail_uuid = attachment_uuid
 
             if attachment and (button_type == "edit" and post_id > 0):
                 attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path,

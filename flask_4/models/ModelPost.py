@@ -21,5 +21,4 @@ class ModelPost:
     children_posts = []
     depth: int = 0
 
-    attachments = relationship("ModelAttachment", back_populates="post")
     
