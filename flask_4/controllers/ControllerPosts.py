@@ -44,15 +44,6 @@ class ControllerPosts:
                 )
             )
 
-        # if len(post_hierarchy):
-        #     post_hierarchy_reduced = post_hierarchy + list(functools.reduce(
-        #         lambda a, b: (a.childen_posts + b.childen_posts), sequence=post_hierarchy
-        #     ))
-        #     for cur_post in post_hierarchy_reduced:
-        #         post_parent_id_by_title.append(
-        #             (cur_post.post_id, cur_post.title)
-        #         )
-
         if request.method == "POST":
             button_type = request.form.get("button_type")
 
@@ -74,20 +65,20 @@ class ControllerPosts:
                 post.parent_post_id = None
 
             attachment = request.files['attachment']
-            if attachment and (button_type == "edit" and post_id > 0):
-                post.thumbnail_uuid = str(uuid.uuid4())
             filename = secure_filename(attachment.filename)
             attachment_path = os.path.join('./static/thumbnails', filename)
-            attachment_uuid = post.thumbnail_uuid
+            attachment_uuid = str(uuid.uuid4())
             attachment.save(attachment_path)
 
             if attachment and (button_type == "edit" and post_id > 0):
-                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path, thumbnail_uuid=attachment_uuid)
+                attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path,
+                                                   thumbnail_uuid=attachment_uuid)
                 existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
                 if existing_attachment:
                     attachment_model.attachment_id = existing_attachment[0].attachment_id
                     ControllerDatabase.update_attachment(attachment_model)
                 else:
+                    post.thumbnail_uuid = attachment_uuid
                     ControllerDatabase.insert_attachment(attachment_model)
 
                 ControllerDatabase.update_post(post) if button_type == "edit" else ControllerDatabase.insert_post(post)
@@ -95,27 +86,9 @@ class ControllerPosts:
                 return redirect(f"/?edited={post.url_slug}")
 
             post_id = ControllerDatabase.insert_post(post)
-            attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
+            attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path,
+                                               thumbnail_uuid=attachment_uuid)
             ControllerDatabase.insert_attachment(attachment_model)
-
-            # if attachment:
-            #     attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
-            #
-            #     if button_type == "edit" and post_id > 0:
-            #         existing_attachment = ControllerDatabase.get_attachments_for_post(post_id)
-            #         if existing_attachment:
-            #             attachment_model.attachment_id = existing_attachment[0].attachment_id
-            #             ControllerDatabase.update_attachment(attachment_model)
-            #         else:
-            #             ControllerDatabase.insert_attachment(attachment_model)
-            #
-            # if button_type == "edit":
-            #     ControllerDatabase.update_post(post)
-            #     return redirect(f"/?edited={post.url_slug}")
-            # else:
-            #     post_id = ControllerDatabase.insert_post(post)
-            #     attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path)
-            #     ControllerDatabase.insert_attachment(attachment_model)
 
             return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 

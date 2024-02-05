@@ -197,6 +197,27 @@ class ControllerDatabase:
             print(exc)
 
     @staticmethod
+    def get_all_attachments():
+        attachments = []
+        try:
+            with UtilDatabaseCursor() as cursor:
+                cursor.execute(
+                    f"SELECT * FROM attachments"
+                )
+                for (attachment_id, post_id, file_name, file_path, thumbnail_uuid) in cursor.fetchall():
+                    attachment = ModelAttachment()
+                    attachment.attachment_id = attachment_id
+                    attachment.post_id = post_id
+                    attachment.file_name = file_name
+                    attachment.file_path = file_path
+                    attachment.thumbnail_uuid = thumbnail_uuid
+                    attachments.append(attachment)
+
+        except Exception as exc:
+            print(exc)
+        return attachments
+
+    @staticmethod
     def insert_attachment(attachment: ModelAttachment):
         try:
             with UtilDatabaseCursor() as cursor:

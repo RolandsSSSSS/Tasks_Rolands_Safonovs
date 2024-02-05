@@ -9,6 +9,10 @@
         <div class="actionMsg">{{ message }}</div>
     {% endif %}
 
+    {% for attachment in attachments %}
+      {{ attachment.post_id }}
+    {% endfor %}
+
     {{ render_table_for_posts(posts) }}
 {% endblock %}
 

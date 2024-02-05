@@ -1,5 +1,4 @@
 import dataclasses
-from sqlalchemy import ForeignKey, Column, Integer
 from sqlalchemy.orm import relationship
 
 
@@ -12,4 +11,3 @@ class ModelAttachment:
     thumbnail_uuid: str = ""
 
     post = relationship("ModelPost", back_populates="attachments")
-    post_id = Column(Integer, ForeignKey('post.post_id'))

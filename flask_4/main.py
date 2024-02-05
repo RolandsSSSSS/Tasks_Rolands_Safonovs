@@ -13,6 +13,7 @@ def home():
     params_GET = flask.request.args
     message = ''
     posts = ControllerDatabase.get_all_posts_flattened()
+    attachments = ControllerDatabase.get_all_attachments()
 
     if params_GET.get("deleted"):
         message = 'Post deleted'
@@ -22,7 +23,8 @@ def home():
     return flask.render_template(
         'home.html',
         message=message,
-        posts=posts
+        posts=posts,
+        attachments=attachments
     )
 
 
