@@ -146,13 +146,13 @@ class ControllerDatabase:
         try:
             with UtilDatabaseCursor() as cursor:
                 cursor.execute(
-                    "SELECT tags.tag_id, tags.label "
+                    "SELECT tags.tag_id, tags.label, tags_in_post.post_id "
                     "FROM tags_in_post JOIN tags ON tags_in_post.tag_id = tags.tag_id "
                     "WHERE tags_in_post.post_id = ?",
                     [post_id, ]
                 )
 
-                tags = [ModelTag(tag_id, label) for tag_id, label in cursor.fetchall()]
+                tags = [ModelTag(tag_id, label, post_id) for tag_id, label, post_id in cursor.fetchall()]
 
         except Exception as exc:
             print(exc)

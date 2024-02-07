@@ -35,28 +35,18 @@
             </select>
 
             <label class="label-tags">Tags</label>
-            {% if post.post_id > 0 %}
-                <div class="tags">
-                    {% for tag in tags %}
-                    <div class="tags-list">
-                        <div class="tags-content">
-                            <input class="checkbox" type="checkbox" name="tags" value="{{ tag.tag_id }}"
-                                {% for post_tag_id in post_tags_ids %}
-                                    {% if tag.tag_id == post_tag_id.tag_id %}
-                                        checked
-                                    {% endif %}
-                                {% endfor %}
-                            />
-                            <div>{{ tag.label }}</div>
-                        </div>
+            <div class="tags">
+                {% for tag in tags %}
+                <div class="tags-list">
+                    <div class="tags-content">
+                        <input class="checkbox" type="checkbox" name="tags" value="{{ tag.tag_id }}"
+                               {% if tag.tag_id in tag_ids_for_post %} checked {% endif %}
+                        />
+                        <div>{{ tag.label }}</div>
                     </div>
-                    {% endfor %}
                 </div>
-            {% else %}
-                <div class="tags-message">
-                    <span>You can add tags later in "Edit"</span>
-                </div>
-            {% endif %}
+                {% endfor %}
+            </div>
 
             <label>Attachment</label>
             <input class="attachment" type="file" name="attachment" id="attachment" required>

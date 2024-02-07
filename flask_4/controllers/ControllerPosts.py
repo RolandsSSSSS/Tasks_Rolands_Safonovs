@@ -88,18 +88,22 @@ class ControllerPosts:
                 return redirect(f"/?edited={post.url_slug}")
 
             post_id = ControllerDatabase.insert_post(post)
+            ControllerDatabase.update_post_tags(post_id, selected_tags_ids)
             attachment_model = ModelAttachment(post_id=post_id, file_name=filename, file_path=attachment_path,
                                                thumbnail_uuid=attachment_uuid)
             ControllerDatabase.insert_attachment(attachment_model)
 
             return redirect(url_for('posts.post_view', url_slug=post.url_slug))
 
+        tag_ids_for_post = [tag.tag_id for tag in post_tags_ids]
+
         return flask.render_template(
             'posts/edit.html',
             post=post,
             post_parent_id_by_title=post_parent_id_by_title,
             tags=tags,
-            post_tags_ids=post_tags_ids
+            post_tags_ids=post_tags_ids,
+            tag_ids_for_post=tag_ids_for_post
         )
 
     @staticmethod
