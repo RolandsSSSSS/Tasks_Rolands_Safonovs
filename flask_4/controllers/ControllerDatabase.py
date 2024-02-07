@@ -114,27 +114,22 @@ class ControllerDatabase:
         return posts
 
     @staticmethod
-    def get_all_posts_flattened(parent_post_id=None, exclude_branch_post_id=None):
+    def get_all_posts_flattened(parent_post_id=None, exclude_branch_post_id=None, depth=0):
         posts_flat = []
         try:
             post_hierarchy = ControllerDatabase.get_all_posts(parent_post_id)
 
-            while len(post_hierarchy) > 0:
-                post_cur = post_hierarchy.pop(0)
-
-                if post_cur.post_id == exclude_branch_post_id:
+            for post in post_hierarchy:
+                if post.post_id == exclude_branch_post_id:
                     continue
 
-                if post_cur.parent_post_id is not None:
-                    post_cur.depth += 1
-                    post_parent = next(
-                        iter(it for it in posts_flat if it.post_id == post_cur.parent_post_id))
+                post.depth = depth
+                posts_flat.append(post)
 
-                    if post_parent:
-                        post_cur.depth += post_parent.depth
-
-                post_hierarchy = post_cur.children_posts + post_hierarchy
-                posts_flat.append(post_cur)
+                if post.children_posts:
+                    child_posts_flat = ControllerDatabase.get_all_posts_flattened(post.post_id, exclude_branch_post_id,
+                                                                                  depth+1)
+                    posts_flat += child_posts_flat
 
         except Exception as exc:
             print(exc)

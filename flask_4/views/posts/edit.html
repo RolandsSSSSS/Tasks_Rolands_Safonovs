@@ -40,7 +40,9 @@
                 <div class="tags-list">
                     <div class="tags-content">
                         <input class="checkbox" type="checkbox" name="tags" value="{{ tag.tag_id }}"
-                               {% if tag.tag_id in tag_ids_for_post %} checked {% endif %}
+                            {% if post.post_id > 0 %}
+                                {% if tag.tag_id in tag_ids_for_post %} checked {% endif %}
+                            {% endif %}
                         />
                         <div>{{ tag.label }}</div>
                     </div>
